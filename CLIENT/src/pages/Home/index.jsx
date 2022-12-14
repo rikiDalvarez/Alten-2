@@ -17,7 +17,8 @@ function Home() {
 	const [filter, setFilter] = useState('');
 
 	useEffect(() => {
-		getPodcasts()
+		getPodcasts();
+		setLoading(false)
 	}, []);
 
 	async function getPodcasts() {
@@ -28,7 +29,6 @@ function Home() {
 
 	return (
 		<Container>
-			{console.log(topPodcasts)}
 			<Row>
 				<Col sm={12}>
 					<Header loading={loading}></Header>
@@ -38,15 +38,13 @@ function Home() {
 				</Col>
 			</Row>
 			<Row>
-
-				{topPodcasts.map((index, podcast) => (
+				{topPodcasts.map((podcast, index) => (
 					<Card sm={3} key={index} style={{ width: '18rem' }}>
-						<Card.Img variant="top" src="holder.js/100px180" />
+						<Card.Img variant="top" src={podcast["im:image"][0].label} />
 						<Card.Body>
-							<Card.Title>test</Card.Title>
+							<Card.Title>{podcast["im:name"].label}</Card.Title>
 							<Card.Text>
-								Some quick example text to build on the card title and make up the
-								bulk of the card's content.
+								Author: {podcast["im:artist"].label}
 							</Card.Text>
 							<Button variant="primary">Go somewhere</Button>
 						</Card.Body>

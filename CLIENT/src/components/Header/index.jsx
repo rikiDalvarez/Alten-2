@@ -8,12 +8,12 @@ function GrowExample() {
 }
 
 function Header({ loading }) {
-	console.log({ loading })
 	return (
 		<Navbar expand="lg" variant="light" bg="light">
 			<Container>
 				<Navbar.Brand href="#">PODCASTER</Navbar.Brand>
 			</Container>
+			{loading ? <GrowExample></GrowExample> : ""}
 		</Navbar>
 	);
 }
