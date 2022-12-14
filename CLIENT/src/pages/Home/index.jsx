@@ -21,14 +21,10 @@ function Home() {
 		try {
 			const internalStorage = JSON.parse(localStorage.getItem("podcasts"));
 			if (internalStorage) {
-				console.log(internalStorage)
-				console.log("internal if")
 				const lastTime = new Date(JSON.parse(internalStorage.lastTimeCalled));
 				const currentTime = Date.now();
 				const moreThanDay = Math.abs(currentTime - lastTime) > (1000 * 60 * 60 * 24);
-				console.log(moreThanDay)
 				if (moreThanDay) {
-					console.log("morethanaday")
 					const response = await ApiClient.getTopPodcasts();
 					setTopPodcasts(response.feed.entry);
 					localStorage.setItem("podcasts", JSON.stringify({ lastTimeCalled: Date.now().toString(), conteudo: response.feed.entry }))
@@ -36,11 +32,9 @@ function Home() {
 					setTopPodcasts(internalStorage.conteudo)
 				}
 			} else {
-				console.log("else")
 				const response = await ApiClient.getTopPodcasts();
 				setTopPodcasts(response.feed.entry);
 				localStorage.setItem("podcasts", JSON.stringify({ lastTimeCalled: Date.now().toString(), conteudo: response.feed.entry }))
-
 			}
 		} catch (error) {
 			console.log(error)
@@ -54,23 +48,33 @@ function Home() {
 				<Col sm={12}>
 					<Header loading={loading}></Header>
 				</Col>
-				<Col sm={{ span: 12, offset: 9 }}>
+			</Row>
+			<Row style={{ display: "flex", justifyContent: "flex-end" }}>
+				<Col style={{ textAlign: "right", padding: "10px" }}>
 					{topPodcasts.length} <Search value={filter} changeValue={setFilter}></Search>
 				</Col>
 			</Row>
-			<Row>
-				{topPodcasts.map((podcast, index) => (
-					<Card sm={3} key={index} style={{ width: '18rem' }}>
-						<Card.Img variant="top" src={podcast["im:image"][2].label} />
-						<Card.Body>
-							<Card.Title>{podcast["im:name"].label}</Card.Title>
-							<Card.Text>
-								Author: {podcast["im:artist"].label}
-							</Card.Text>
-						</Card.Body>
-					</Card>
-				))}
-			</Row>
+			<Container>
+				<Row style={{ marginTop: "50px", display: "flex" }}>
+					{topPodcasts
+						?.filter((podcast) => {
+							if (podcast["im:name"].label.toLowerCase().includes(filter.toLowerCase()) || podcast["im:artist"].label.toLowerCase().includes(filter.toLowerCase())) return true;
+						})
+						.map((podcast, index) => (
+							<Col sm={3} >
+								<Card key={index} style={{ marginTop: "10px" }}>
+									<Card.Img variant="top" src={podcast["im:image"][2].label} />
+									<Card.Body style={{ minHeight: "112px" }}>
+										<Card.Title>{podcast["im:name"].label}</Card.Title>
+										<Card.Text>
+											Author: {podcast["im:artist"].label}
+										</Card.Text>
+									</Card.Body>
+								</Card>
+							</Col>
+						))}
+				</Row>
+			</Container>
 		</Container>
 	)
 }
