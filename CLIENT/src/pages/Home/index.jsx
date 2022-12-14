@@ -4,6 +4,12 @@ import PodcasterCard from '../../components/PodcasterCard'
 import PodcastList from '../../components/PodcastList'
 import Search from '../../components/Search'
 import ApiClient from "../../Services/ApiClient.js"
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import Button from 'react-bootstrap/Button';
+import Card from 'react-bootstrap/Card';
+
 
 function Home() {
 	const [topPodcasts, setTopPodcasts] = useState([])
@@ -18,17 +24,36 @@ function Home() {
 		setLoading(true);
 		const response = await ApiClient.getTopPodcasts();
 		setTopPodcasts(response.feed.entry)
-		console.log("home:" + loading)
 	}
 
 	return (
-		<>
-			<Header loading={loading}></Header>
-			<Search value={filter} changeValue={setFilter}></Search>
-			{console.log(filter)}
-			<PodcasterCard></PodcasterCard>
-			<PodcastList></PodcastList>
-		</>
+		<Container>
+			{console.log(topPodcasts)}
+			<Row>
+				<Col sm={12}>
+					<Header loading={loading}></Header>
+				</Col>
+				<Col sm={{ span: 12, offset: 9 }}>
+					{topPodcasts.length} <Search value={filter} changeValue={setFilter}></Search>
+				</Col>
+			</Row>
+			<Row>
+
+				{topPodcasts.map((index, podcast) => (
+					<Card sm={3} key={index} style={{ width: '18rem' }}>
+						<Card.Img variant="top" src="holder.js/100px180" />
+						<Card.Body>
+							<Card.Title>test</Card.Title>
+							<Card.Text>
+								Some quick example text to build on the card title and make up the
+								bulk of the card's content.
+							</Card.Text>
+							<Button variant="primary">Go somewhere</Button>
+						</Card.Body>
+					</Card>
+				))}
+			</Row>
+		</Container>
 	)
 }
 

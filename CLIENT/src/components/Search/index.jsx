@@ -9,7 +9,6 @@ function Search({ value, changeValue }) {
 				className="px-4 py-2 w-80"
 				placeholder="Search...">
 			</input>
-			<div>Search</div>
 		</>
 
 	)

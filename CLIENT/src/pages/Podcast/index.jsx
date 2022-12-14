@@ -1,19 +1,13 @@
 import React from 'react'
 import PodcasterCard from "../../components/PodcasterCard"
+import PodcastList from '../../components/PodcastList'
 
 function Podcast() {
 	return (
 		<div>Podcast
 			<PodcasterCard></PodcasterCard>
 			<h1>Episodes: 1</h1>
-			<div>
-				<ul>
-					<li>title</li>
-					<li>date</li>
-					<li>duration</li>
-				</ul>
-			</div>
-
+			<PodcastList></PodcastList>
 		</div>
 	)
 }
