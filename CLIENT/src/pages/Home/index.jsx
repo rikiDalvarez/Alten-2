@@ -1,15 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import Header from "../../components/Header"
-import PodcasterCard from '../../components/PodcasterCard'
-import PodcastList from '../../components/PodcastList'
 import Search from '../../components/Search'
 import ApiClient from "../../Services/ApiClient.js"
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
-
 
 function Home() {
 	const [topPodcasts, setTopPodcasts] = useState([])
@@ -22,9 +18,33 @@ function Home() {
 
 	async function getPodcasts() {
 		setLoading(true);
-		const response = await ApiClient.getTopPodcasts();
-		setTopPodcasts(response.feed.entry);
-		localStorage.setItem(1, JSON.stringify({ lastTimeCalled: Date.now().toString(), conteudo: response }))
+		try {
+			const internalStorage = JSON.parse(localStorage.getItem("podcasts"));
+			if (internalStorage) {
+				console.log(internalStorage)
+				console.log("internal if")
+				const lastTime = new Date(JSON.parse(internalStorage.lastTimeCalled));
+				const currentTime = Date.now();
+				const moreThanDay = Math.abs(currentTime - lastTime) > (1000 * 60 * 60 * 24);
+				console.log(moreThanDay)
+				if (moreThanDay) {
+					console.log("morethanaday")
+					const response = await ApiClient.getTopPodcasts();
+					setTopPodcasts(response.feed.entry);
+					localStorage.setItem("podcasts", JSON.stringify({ lastTimeCalled: Date.now().toString(), conteudo: response.feed.entry }))
+				} else {
+					setTopPodcasts(internalStorage.conteudo)
+				}
+			} else {
+				console.log("else")
+				const response = await ApiClient.getTopPodcasts();
+				setTopPodcasts(response.feed.entry);
+				localStorage.setItem("podcasts", JSON.stringify({ lastTimeCalled: Date.now().toString(), conteudo: response.feed.entry }))
+
+			}
+		} catch (error) {
+			console.log(error)
+		}
 		setLoading(false);
 	}
 
@@ -41,7 +61,7 @@ function Home() {
 			<Row>
 				{topPodcasts.map((podcast, index) => (
 					<Card sm={3} key={index} style={{ width: '18rem' }}>
-						<Card.Img variant="top" src={podcast["im:image"][0].label} />
+						<Card.Img variant="top" src={podcast["im:image"][2].label} />
 						<Card.Body>
 							<Card.Title>{podcast["im:name"].label}</Card.Title>
 							<Card.Text>
