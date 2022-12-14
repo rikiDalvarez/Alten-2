@@ -18,13 +18,14 @@ function Home() {
 
 	useEffect(() => {
 		getPodcasts();
-		setLoading(false)
 	}, []);
 
 	async function getPodcasts() {
 		setLoading(true);
 		const response = await ApiClient.getTopPodcasts();
-		setTopPodcasts(response.feed.entry)
+		setTopPodcasts(response.feed.entry);
+		localStorage.setItem(1, JSON.stringify({ lastTimeCalled: Date.now().toString(), conteudo: response }))
+		setLoading(false);
 	}
 
 	return (
@@ -46,7 +47,6 @@ function Home() {
 							<Card.Text>
 								Author: {podcast["im:artist"].label}
 							</Card.Text>
-							<Button variant="primary">Go somewhere</Button>
 						</Card.Body>
 					</Card>
 				))}
