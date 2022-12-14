@@ -7,12 +7,12 @@ function GrowExample() {
 	return <Spinner animation="grow" />;
 }
 
-function Header() {
+function Header({ loading }) {
+	console.log({ loading })
 	return (
 		<Navbar expand="lg" variant="light" bg="light">
 			<Container>
 				<Navbar.Brand href="#">PODCASTER</Navbar.Brand>
-				<GrowExample></GrowExample>
 			</Container>
 		</Navbar>
 	);

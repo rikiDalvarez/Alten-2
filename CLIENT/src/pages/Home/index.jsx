@@ -8,6 +8,7 @@ import ApiClient from "../../Services/ApiClient.js"
 function Home() {
 	const [topPodcasts, setTopPodcasts] = useState([])
 	const [loading, setLoading] = useState();
+	const [filter, setFilter] = useState('');
 
 	useEffect(() => {
 		getPodcasts()
@@ -17,12 +18,14 @@ function Home() {
 		setLoading(true);
 		const response = await ApiClient.getTopPodcasts();
 		setTopPodcasts(response.feed.entry)
+		console.log("home:" + loading)
 	}
 
 	return (
 		<>
-			<Header></Header>
-			<Search></Search>
+			<Header loading={loading}></Header>
+			<Search value={filter} changeValue={setFilter}></Search>
+			{console.log(filter)}
 			<PodcasterCard></PodcasterCard>
 			<PodcastList></PodcastList>
 		</>
