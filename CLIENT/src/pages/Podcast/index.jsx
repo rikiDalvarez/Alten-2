@@ -45,13 +45,14 @@ function Podcast() {
 			} else {
 				const response = await ApiClient.getPodcast(podcastId);
 				setPodcast(response[0]);
+				console.log(podcast)
 				localStorage.setItem(podcastId, JSON.stringify({ lastTimeCalled: Date.now().toString(), conteudo: response[0] }))
 			}
 		} catch (error) {
 			console.log(error)
 		}
 		setLoading(false);
-
+		console.log(podcast)
 	}
 
 	// if (localStorage.getItem(podcastId) !== null) {
@@ -73,7 +74,7 @@ function Podcast() {
 				</Col>
 				<Col sm={8}>
 					<h1>Episodes: { }</h1>
-					<PodcastList></PodcastList>
+					<PodcastList title={1} duration={2} date={3}></PodcastList>
 				</Col>
 			</Row>
 		</Container>
