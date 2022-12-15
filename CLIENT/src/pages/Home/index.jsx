@@ -6,6 +6,7 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Card from 'react-bootstrap/Card';
+import { Link } from 'react-router-dom';
 
 function Home() {
 	const [topPodcasts, setTopPodcasts] = useState([])
@@ -61,16 +62,18 @@ function Home() {
 							if (podcast["im:name"].label.toLowerCase().includes(filter.toLowerCase()) || podcast["im:artist"].label.toLowerCase().includes(filter.toLowerCase())) return true;
 						})
 						.map((podcast, index) => (
-							<Col sm={3} >
-								<Card key={index} style={{ marginTop: "10px" }}>
-									<Card.Img variant="top" src={podcast["im:image"][2].label} />
-									<Card.Body style={{ minHeight: "112px" }}>
-										<Card.Title>{podcast["im:name"].label}</Card.Title>
-										<Card.Text>
-											Author: {podcast["im:artist"].label}
-										</Card.Text>
-									</Card.Body>
-								</Card>
+							<Col sm={3} key={podcast.id.attributes["im:id"]}>
+								<Link to={`/podcast/${podcast.id.attributes["im:id"]}`}>
+									<Card key={index} style={{ marginTop: "10px" }}>
+										<Card.Img variant="top" src={podcast["im:image"][2].label} />
+										<Card.Body style={{ minHeight: "112px" }}>
+											<Card.Title>{podcast["im:name"].label}</Card.Title>
+											<Card.Text>
+												Author: {podcast["im:artist"].label}
+											</Card.Text>
+										</Card.Body>
+									</Card>
+								</Link>
 							</Col>
 						))}
 				</Row>
