@@ -11,7 +11,6 @@ function PodcastEpisode() {
 		<Container>
 			<Header></Header>
 			<Row>
-
 				<PodcasterCard></PodcasterCard>
 				<Card style={{ width: '18rem' }}>
 					<Card.Body>

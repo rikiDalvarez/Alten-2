@@ -5,9 +5,27 @@ export default {
 		return fetchRequest("us/rss/toppodcasts/limit=100/genre=1310/json");
 	},
 	getPodcast: (id) => {
-		return fetchRequest(id);
+		return fetchPodcast(id);
 	}
 };
+
+const fetchPodcast = async (id) => {
+	const response = await fetch(`https://api.allorigins.win/get?url=${encodeURIComponent(`https://itunes.apple.com/lookup?id=${id}`)}`);
+	const responseJ = await response.json();
+	const test = (JSON.parse(responseJ.contents).results)
+
+	return test
+}
+
+// const fetchPodcast = async (id) => {
+// 	fetch(`https://api.allorigins.win/get?url=${encodeURIComponent(`https://itunes.apple.com/lookup?id=${id}`)}`)
+// 		.then(response => {
+// 			if (response.ok) {
+// 				return response.json()
+// 			};
+// 			throw new Error('Network response was not ok.')
+// 		})
+// }
 
 const fetchRequest = (str) => {
 	return fetch(`${BASE_URL}${str}`)
