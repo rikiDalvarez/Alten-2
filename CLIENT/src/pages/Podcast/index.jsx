@@ -8,11 +8,14 @@ import ApiClient from '../../Services/ApiClient'
 import Row from 'react-bootstrap/esm/Row'
 import Col from 'react-bootstrap/esm/Col'
 
+
 function Podcast() {
 	const [podcast, setPodcast] = useState();
 	const [loading, setLoading] = useState()
 
 	const { podcastId } = useParams();
+	const location = useLocation();
+
 
 	useEffect(() => {
 		getPodcast(podcastId)
@@ -22,6 +25,7 @@ function Podcast() {
 	// 	const podcastLocal = localStorage.getItem(podcastId)
 	// 	return podcastLocal
 	// }	
+
 
 	const getPodcast = async (podcastId) => {
 		setLoading(true);
@@ -47,8 +51,7 @@ function Podcast() {
 			console.log(error)
 		}
 		setLoading(false);
-		const response = await ApiClient.getPodcast(podcastId);
-		console.log(response)
+
 	}
 
 	// if (localStorage.getItem(podcastId) !== null) {
@@ -66,10 +69,10 @@ function Podcast() {
 			</Row>
 			<Row>
 				<Col sm={4}>
-					<PodcasterCard name={podcast.artistName}></PodcasterCard>
+					<PodcasterCard description={location.state.description} name={podcast?.artistName} image={podcast?.artworkUrl600}></PodcasterCard>
 				</Col>
 				<Col sm={8}>
-					<h1>Episodes: 1</h1>
+					<h1>Episodes: { }</h1>
 					<PodcastList></PodcastList>
 				</Col>
 			</Row>

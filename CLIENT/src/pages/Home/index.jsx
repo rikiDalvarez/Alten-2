@@ -12,6 +12,7 @@ function Home() {
 	const [topPodcasts, setTopPodcasts] = useState([])
 	const [loading, setLoading] = useState();
 	const [filter, setFilter] = useState('');
+	// const [filterLenght, setFilterLenght] = useState(0)
 
 	useEffect(() => {
 		getPodcasts();
@@ -42,6 +43,69 @@ function Home() {
 		}
 		setLoading(false);
 	}
+
+	// const test = (arr) => {
+	// 	const filteredArray = arr.filter((podcast) => {
+	// 		if (podcast["im:name"].label.toLowerCase().includes(filter.toLowerCase()) ||
+	// 			podcast["im:artist"].label.toLowerCase().includes(filter.toLowerCase()));
+	// 		return true;
+	// 	})
+	// 	setFilterLenght(filteredArray.length)
+	// 	console.log(filteredArray)
+	// 	return filteredArray;
+	// }
+
+	return (
+		<Container>
+			<Row>
+				<Col sm={12}>
+					<Header loading={loading}></Header>
+				</Col>
+			</Row>
+			<Row style={{ display: "flex", justifyContent: "flex-end" }}>
+				<Col style={{ textAlign: "right", padding: "10px" }}>
+					{100} <Search value={filter} changeValue={setFilter}></Search>
+				</Col>
+			</Row>
+			<Container>
+				<Row style={{ marginTop: "50px", display: "flex" }}>
+					{topPodcasts
+						?.filter((podcast) => {
+							if (podcast["im:name"].label.toLowerCase().includes(filter.toLowerCase()) ||
+								podcast["im:artist"].label.toLowerCase().includes(filter.toLowerCase()))
+								return true;
+						})
+						.map((podcast, index) =>
+						(
+							<Col sm={3} key={podcast.id.attributes["im:id"]}>
+								<Link to={`/podcast/${podcast.id.attributes["im:id"]}`} state={{ description: podcast.summary.label }} >
+									<Card key={index} style={{ marginTop: "20px" }}>
+										<div style={{ textAlign: "center", padding: "10px" }}>
+											<Card.Img variant="top" src={podcast["im:image"][2].label} style={{ borderRadius: "50%", width: "80%" }} />
+										</div>
+										<Card.Body style={{ minHeight: "112px" }}>
+											<Card.Title>{podcast["im:name"].label}</Card.Title>
+											<Card.Text>
+												Author: {podcast["im:artist"].label}
+											</Card.Text>
+										</Card.Body>
+									</Card>
+								</Link>
+							</Col>
+						)
+						)}
+				</Row>
+			</Container>
+		</Container>
+	)
+}
+
+export default Home
+
+/*
+
+function Home() {
+	
 
 	return (
 		<Container>
@@ -84,4 +148,4 @@ function Home() {
 	)
 }
 
-export default Home
+export default Home*/ 
