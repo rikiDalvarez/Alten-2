@@ -63,7 +63,7 @@ function Home() {
 						})
 						.map((podcast, index) => (
 							<Col sm={3} key={podcast.id.attributes["im:id"]}>
-								<Link to={`/podcast/${podcast.id.attributes["im:id"]}`}>
+								<Link to={`/podcast/${podcast.id.attributes["im:id"]}`} state={{ podcast, time: Date.now() }}>
 									<Card key={index} style={{ marginTop: "10px" }}>
 										<Card.Img variant="top" src={podcast["im:image"][2].label} />
 										<Card.Body style={{ minHeight: "112px" }}>
