@@ -8,9 +8,8 @@ function PodcasterCard({ name, image, description }) {
 			<Card.Body>
 				<Card.Title>{name}</Card.Title>
 				<Card.Text>
-					{description}
+					Description: {description}
 				</Card.Text>
-				<Button variant="primary">Go somewhere</Button>
 			</Card.Body>
 		</Card>
 	);

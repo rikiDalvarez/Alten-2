@@ -1,20 +1,21 @@
 import Table from 'react-bootstrap/Table';
 
 function PodcastList(props) {
-	return (
+	return (<>
+		<h2>Episodes: {props.count}</h2>
 		<Table striped bordered hover>
 			<thead>
 				<tr>
-					<th>Title</th>
-					<th>Date</th>
-					<th>Duration</th>
+					<th>{props.title}</th>
+					<th>{props.date}</th>
+					<th>{props.duration}</th>
 				</tr>
 			</thead>
 			<tbody>
 				<tr>
-					<td>{props.title}</td>
-					<td>{props.date}</td>
-					<td>{props.duration}</td>
+					<td>2</td>
+					<td>1</td>
+					<td></td>
 				</tr>
 				<tr>
 					<td>1</td>
@@ -28,6 +29,7 @@ function PodcastList(props) {
 				</tr>
 			</tbody>
 		</Table>
+	</>
 	);
 }
 

@@ -52,7 +52,6 @@ function Podcast() {
 			console.log(error)
 		}
 		setLoading(false);
-		console.log(podcast)
 	}
 
 	// if (localStorage.getItem(podcastId) !== null) {
@@ -73,8 +72,8 @@ function Podcast() {
 					<PodcasterCard description={location.state.description} name={podcast?.artistName} image={podcast?.artworkUrl600}></PodcasterCard>
 				</Col>
 				<Col sm={8}>
-					<h1>Episodes: { }</h1>
-					<PodcastList title={1} duration={2} date={3}></PodcastList>
+
+					<PodcastList title={podcast?.collectionName} count={podcast?.trackCount} duration={2} date={3}></PodcastList>
 				</Col>
 			</Row>
 		</Container>
