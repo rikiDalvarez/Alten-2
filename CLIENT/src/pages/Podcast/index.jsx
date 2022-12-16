@@ -73,7 +73,7 @@ function Podcast() {
 				</Col>
 				<Col sm={8}>
 
-					<PodcastList title={podcast?.collectionName} count={podcast?.trackCount} duration={2} date={3}></PodcastList>
+					<PodcastList id={podcastId} title={podcast?.collectionName} count={podcast?.trackCount} duration={2} date={3}></PodcastList>
 				</Col>
 			</Row>
 		</Container>
