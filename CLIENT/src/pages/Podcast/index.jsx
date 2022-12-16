@@ -15,7 +15,7 @@ function Podcast() {
 
 	const { podcastId } = useParams();
 	const location = useLocation();
-	console.log("pocast loc: " + { location })
+	console.log("pocast loc: " + location.state.props)
 
 
 	useEffect(() => {
@@ -70,10 +70,11 @@ function Podcast() {
 			</Row>
 			<Row style={{ padding: "10px", marginTop: "20px" }}>
 				<Col sm={4}>
-					<PodcasterCard description={location.state.description} name={podcast?.artistName} image={podcast?.artworkUrl600}></PodcasterCard>
+					<PodcasterCard id={podcastId} description={location.state.description} name={podcast?.artistName} image={podcast?.artworkUrl600}></PodcasterCard>
 				</Col>
 				<Col sm={8}>
 					<PodcastList
+
 						description={location.state.description} name={podcast?.artistName} image={podcast?.artworkUrl600}
 						id={podcastId} title={podcast?.collectionName} count={podcast?.trackCount} duration={2} date={3}></PodcastList>
 				</Col>
