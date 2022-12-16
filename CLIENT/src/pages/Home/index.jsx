@@ -12,7 +12,6 @@ function Home() {
 	const [topPodcasts, setTopPodcasts] = useState([])
 	const [loading, setLoading] = useState();
 	const [filter, setFilter] = useState('');
-	// const [filterLenght, setFilterLenght] = useState(0)
 
 	useEffect(() => {
 		getPodcasts();
@@ -43,17 +42,6 @@ function Home() {
 		}
 		setLoading(false);
 	}
-
-	// const test = (arr) => {
-	// 	const filteredArray = arr.filter((podcast) => {
-	// 		if (podcast["im:name"].label.toLowerCase().includes(filter.toLowerCase()) ||
-	// 			podcast["im:artist"].label.toLowerCase().includes(filter.toLowerCase()));
-	// 		return true;
-	// 	})
-	// 	setFilterLenght(filteredArray.length)
-	// 	console.log(filteredArray)
-	// 	return filteredArray;
-	// }
 
 	return (
 		<Container>
@@ -101,3 +89,5 @@ function Home() {
 }
 
 export default Home
+
+
