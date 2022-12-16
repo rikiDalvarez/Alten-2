@@ -6,14 +6,9 @@ import Card from 'react-bootstrap/Card';
 import Row from 'react-bootstrap/esm/Row';
 import { useLocation } from 'react-router-dom';
 import Col from 'react-bootstrap/esm/Col';
-import PodcastList from '../../components/PodcastList';
-
-
-
 
 function PodcastEpisode() {
 	const location = useLocation();
-	console.log({ location })
 	return (
 		<Container>
 			<Row>
@@ -46,6 +41,5 @@ function PodcastEpisode() {
 
 	)
 }
-// description = { location.state.props.description } name = { location.state.props.collectionName } image = { location.state.props.artworkUrl600 }
-// id = { location.state.props.artistId } title = { location.state.props.collectionName } count = { location.state.props.trackCount } duration = { 2} date = { 3} >
+
 export default PodcastEpisode

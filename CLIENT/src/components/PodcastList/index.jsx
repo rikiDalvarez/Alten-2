@@ -1,6 +1,4 @@
-import Col from 'react-bootstrap/esm/Col';
-import Container from 'react-bootstrap/esm/Container';
-import Row from 'react-bootstrap/esm/Row';
+
 import Table from 'react-bootstrap/Table';
 import { Link } from 'react-router-dom';
 

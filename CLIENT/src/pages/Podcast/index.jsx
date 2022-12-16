@@ -15,18 +15,11 @@ function Podcast() {
 
 	const { podcastId } = useParams();
 	const location = useLocation();
-	console.log("pocast loc: " + location.state.props)
 
 
 	useEffect(() => {
 		getPodcast(podcastId)
 	}, [])
-
-	// const getPodcastInfo = (podcastId) => {
-	// 	const podcastLocal = localStorage.getItem(podcastId)
-	// 	return podcastLocal
-	// }	
-
 
 	const getPodcast = async (podcastId) => {
 		setLoading(true);
@@ -46,7 +39,6 @@ function Podcast() {
 			} else {
 				const response = await ApiClient.getPodcast(podcastId);
 				setPodcast(response[0]);
-				console.log(podcast)
 				localStorage.setItem(podcastId, JSON.stringify({ lastTimeCalled: Date.now().toString(), conteudo: response[0] }))
 			}
 		} catch (error) {
@@ -55,17 +47,11 @@ function Podcast() {
 		setLoading(false);
 	}
 
-	// if (localStorage.getItem(podcastId) !== null) {
-	// 	getPodcastInfo(podcastId);
-	// } else {
-	// 	getPodcast(podcastId)
-	// }
-
 	return (
 		<Container>
 			<Row>
 				<Col>
-					<Header></Header>
+					<Header loading={loading}></Header>
 				</Col>
 			</Row>
 			<Row style={{ padding: "10px", marginTop: "20px" }}>

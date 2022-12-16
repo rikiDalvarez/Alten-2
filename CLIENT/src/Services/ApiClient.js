@@ -17,15 +17,6 @@ const fetchPodcast = async (id) => {
 	return test
 }
 
-// const fetchPodcast = async (id) => {
-// 	fetch(`https://api.allorigins.win/get?url=${encodeURIComponent(`https://itunes.apple.com/lookup?id=${id}`)}`)
-// 		.then(response => {
-// 			if (response.ok) {
-// 				return response.json()
-// 			};
-// 			throw new Error('Network response was not ok.')
-// 		})
-// }
 
 const fetchRequest = (str) => {
 	return fetch(`${BASE_URL}${str}`)
