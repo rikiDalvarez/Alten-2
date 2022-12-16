@@ -22,7 +22,7 @@ function PodcastList(props) {
 				{tracks?.map((track, index) => (
 					<tr key={index}>
 						<td>
-							<Link to={`/podcast/${props.id}/episode/${props.id}`}>
+							<Link to={`/podcast/${props.id}/episode/${props.id}`} state={{ props }}>
 								{props.title}
 							</Link>
 						</td>
