@@ -68,7 +68,7 @@ function Podcast() {
 					<Header></Header>
 				</Col>
 			</Row>
-			<Row>
+			<Row style={{ padding: "10px", marginTop: "20px" }}>
 				<Col sm={4}>
 					<PodcasterCard description={location.state.description} name={podcast?.artistName} image={podcast?.artworkUrl600}></PodcasterCard>
 				</Col>
